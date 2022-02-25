@@ -1,0 +1,67 @@
+{
+  "projectType": "application",
+  "root": "apps/fe-app",
+  "sourceRoot": "apps/fe-app/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/fe-app",
+        "compiler": "babel",
+        "index": "apps/fe-app/src/index.html",
+        "baseHref": "/",
+        "main": "apps/fe-app/src/main.ts",
+        "polyfills": "apps/fe-app/src/polyfills.ts",
+        "tsConfig": "apps/fe-app/tsconfig.app.json",
+        "assets": ["apps/fe-app/src/favicon.ico", "apps/fe-app/src/assets"],
+        "styles": ["apps/fe-app/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/fe-app/src/environments/environment.ts",
+              "with": "apps/fe-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "fe-app:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "fe-app:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fe-app/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/fe-app"],
+      "options": {
+        "jestConfig": "apps/fe-app/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

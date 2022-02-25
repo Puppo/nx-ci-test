@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "projects": {},
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
+  "projects": {
+    "fe-app": "apps/fe-app",
+    "fe-app-e2e": "apps/fe-app-e2e"
   }
 }
